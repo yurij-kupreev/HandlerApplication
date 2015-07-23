@@ -1,0 +1,28 @@
+﻿@model HandlerApplication.Models.PageData
+@if (Model != null)
+{
+    @*<p>Page @ViewBag.NumOfPage of @ViewBag.NumOfPages</p>*@
+    <p>Page @Model.numOfPage of @Model.numOfPages</p>
+    <ul>
+        @foreach (var item in Model.humansInfo)
+        {
+            <li>id: @item.id, name: @item.name, phone: @item.phone</li>
+        }
+    </ul>
+    @*if (@ViewBag.NumOfPage > 1)
+    {
+        @Html.ActionLink("Previous", "GetJson", new { pageNum = ViewBag.NumOfPage - 1 }, new { @class = "btn btn-default" });
+    }
+    if (@ViewBag.NumOfPage < @ViewBag.NumOfPages)
+    {
+        @Html.ActionLink("Next", "GetJson", new { pageNum = ViewBag.NumOfPage + 1 }, new { @class = "btn btn-default" })
+    }*@
+    if (@Model.numOfPage > 1)
+    {
+        @Html.ActionLink("Previous", "GetJson", new { pageNum = @Model.numOfPage - 1 }, new { @class = "btn btn-default" });
+    }
+    if (@Model.numOfPage < @Model.numOfPages)
+    {
+        @Html.ActionLink("Next", "GetJson", new { pageNum = @Model.numOfPage + 1 }, new { @class = "btn btn-default" })
+    }
+}

@@ -1,0 +1,70 @@
+﻿@model HandlerApplication.Models.PageData
+@if (Model != null)
+{
+    @*<p>Page @ViewBag.NumOfPage of @ViewBag.NumOfPages</p>*@
+    <p>Page @Model.numOfPage of @Model.numOfPages</p>
+    <ul>
+        @foreach (var item in Model.humansInfo)
+        {
+            <li>id: @item.id, name: @item.name, phone: @item.phone</li>
+        }
+    </ul>
+    @*if (@ViewBag.NumOfPage > 1)
+        {
+            @Html.ActionLink("Previous", "GetJson", new { pageNum = ViewBag.NumOfPage - 1 }, new { @class = "btn btn-default" });
+        }
+        if (@ViewBag.NumOfPage < @ViewBag.NumOfPages)
+        {
+            @Html.ActionLink("Next", "GetJson", new { pageNum = ViewBag.NumOfPage + 1 }, new { @class = "btn btn-default" })
+        }*@
+    @*if (@Model.numOfPage > 1)
+        {
+            @Html.ActionLink("Previous", "GetJson", new { pageNum = @Model.numOfPage - 1 }, new { @class = "btn btn-default" });
+        }
+        if (@Model.numOfPage < @Model.numOfPages)
+        {
+            @Html.ActionLink("Next", "GetJson", new { pageNum = @Model.numOfPage + 1 }, new { @class = "btn btn-default" })
+        }*@
+
+    @Html.ActionLink("<", "GetJson", "Home", new { pageNum = @Model.numOfPage - 1 }, new { @class = "btn btn-default" })
+    @Html.ActionLink("1", "GetJson", "Home", new { pageNum = 1 }, new { @class = "btn btn-default" })
+    if (@Model.numOfPage - 4 > 1)
+    {
+        <span class="btn btn-default">...</span>
+        for (int i = -2; i < 0; ++i)
+        {
+            string a = (Model.numOfPage + i).ToString();
+            @Html.ActionLink(a, "GetJson", "Home", new { pageNum = (Model.numOfPage + i) }, new { @class = "btn btn-default" })
+        }
+    }
+    else
+    {
+        for (var i = 2; i < Model.numOfPage; ++i)
+        {
+            @Html.ActionLink(i.ToString(), "GetJson", "Home", new { pageNum = i }, new { @class = "btn btn-default" })
+        }
+    }
+    if (Model.numOfPage != 1 && Model.numOfPage != Model.numOfPages)
+    {
+        <span class="btn btn-default">@Model.numOfPage</span>
+    }
+    if (Model.numOfPages - Model.numOfPage > 4)
+    {
+        for (var i = 1; i <= 2; ++i)
+        {
+            string a = (Model.numOfPage + i).ToString();
+            @Html.ActionLink(a, "GetJson", "Home", new { pageNum = (Model.numOfPage + i) }, new { @class = "btn btn-default" })
+        }
+        <span class="btn btn-default">...</span>
+    }
+    else
+    {
+        for (var i = Model.numOfPage + 1; i < Model.numOfPages; ++i)
+        {
+            @Html.ActionLink(i.ToString(), "GetJson", "Home", new { pageNum = i }, new { @class = "btn btn-default" })
+        }
+    }
+    string b = Model.numOfPages.ToString();
+    @Html.ActionLink(b, "GetJson", "Home", new { pageNum = Model.numOfPages }, new { @class = "btn btn-default" })
+    @Html.ActionLink(">", "GetJson", "Home", new { pageNum = @Model.numOfPage + 1 }, new { @class = "btn btn-default" })
+}

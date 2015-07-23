@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/scripts/jquery-1.8.2.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @*@Scripts.Render("~/scripts/customJsonReader-1.0.js")*@
+</head>
+<body>
+    <div class="site">
+        <div class="logo_block">
+            @*<div class="logo_img">*@
+            <img src=@Url.Content("/Content/logo.png") />
+            @*</div>*@
+            <div class="logo_name">
+                <font size="6" color="#757171">EPAM SYSTEMS</font> <br />
+                <font size="5" color="#757171">UI LAB TRAINING</font>
+            </div>
+            <div class="authorize_block">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <span>@HttpContext.Current.User.Identity.Name</span>
+                    @Html.ActionLink("Logout", "LogOut", "Account", null, new { @class = "btn btn-default" })
+                }
+                else
+                {
+                    <span>Please, log in</span> 
+                    @Html.ActionLink("Login", "LogIn", "Account", null, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-default" })
+                }
+            </div>
+        </div>
+        <div class="top_menu_block">
+            @*@Html.ActionLink("Get Json with controller", "GetJson", new { pageNum = 1 }, new { @class = "btn btn-default" })*@
+            <span class="btn btn-default">About UI lab</span>
+            @Html.ActionLink("Home Tasks", "HomeTask", "Home", null, new { @class = "btn btn-default" })
+            @*<span class="btn btn-default">Home Tasks</span>*@
+            <span class="btn btn-default">Test & Exams</span>
+            @*<ul class="top_menu">
+                    <li>
+                    <li class="btn btn-default">About UI lab</li>
+                    <li class="btn btn-default">Home Tasks</li>
+                    <li class="btn btn-default">Test & Exams</li>
+                </ul>*@
+        </div>
+        @*<div class="bottom_menu_block">
+                @Ajax.ActionLink("Get Json with controller", "GetJson", new { pageNum = 1 }, new AjaxOptions { OnSuccess = "OnSuccess" }, new { @class = "btn btn-default" })<br />
+                <a class="btn btn-default" href="/Handlers/Handler.ashx">Get Json with Generic handler</a><br />
+                <a class="btn btn-default" href="/Handler.abc">Get Json with c# class handler</a><br />
+            </div>*@
+        @*<div class="content_block">
+            <div class="content">*@
+        @RenderBody()
+        @*</div>
+            </div>*@
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

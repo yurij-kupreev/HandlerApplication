@@ -1,0 +1,45 @@
+﻿@model HandlerApplication.Models.PageData
+
+@{
+    ViewBag.Title = "HomeTask";
+}
+
+<div class="bottom_menu_block">
+    @*<div class="botmeny_items">*@
+        @Html.ActionLink("Get Json with controller", "GetJson", new { pageNum = 1 }, new { @class = "btn btn-default botmeny_items", @id = "GetJsonData" })<br />
+    <a class="btn btn-default botmeny_items" href="/Handlers/Handler.ashx">Get Json with Generic handler</a><br />
+    <a class="btn btn-default botmeny_items" href="/Handler.abc">Get Json with c# class handler</a><br />
+    @*</div>*@
+</div>
+
+<div class="content_block">
+    <div class="content">
+        <h2>Home task</h2>
+
+        <div id="Json">
+            @if (ViewBag.GracefulDegradation != null)
+            {
+                @Html.Partial("JsonView")
+            }
+        </div>
+
+        <div id="Pager" class="pager">
+
+        </div>
+
+        <div id="Comments" class="comments_block">
+            @Html.Partial("Comments")
+        </div>
+
+        @using (Ajax.BeginForm("AddComment", new AjaxOptions { OnSuccess = "AppendComment" }))
+        {
+            @Html.TextArea("comment")<br />
+            <input type="submit" value="Add comment" />
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/scripts/customJsonReader-1.0.js")
+}

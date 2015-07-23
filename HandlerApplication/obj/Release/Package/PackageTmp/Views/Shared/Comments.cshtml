@@ -1,0 +1,25 @@
+﻿@*@model IEnumerable<string>*@
+@model HandlerApplication.Models.PageData
+
+<h2>Comments:</h2>
+
+@*@if (ViewBag.Comments != null)
+    {
+        <ul>
+            @foreach (var item in ViewBag.Comments)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    }*@
+
+
+<ul id="ulComments">
+    @if (Model.comments != null)
+    {
+        foreach (var item in Model.comments)
+        {
+            <li>@item</li>
+        }
+    }
+</ul>
